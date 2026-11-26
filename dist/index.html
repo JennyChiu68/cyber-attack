@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f6f3">
+  <meta name="description" content="查看全球网络安全事件、数据泄露和重大服务中断的时间线，了解事件进展及出处。">
+  <title>网络安全事件追踪</title>
+  <link rel="icon" href="./icon.png">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" type="module"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <a class="skip" href="#workspace">跳至内容</a>
+    <header class="site-header" id="home">
+      <div class="wrap header-inner">
+        <a class="brand" href="#home" aria-label="网络安全事件追踪首页">
+          <span class="brand-mark" aria-hidden="true"><i></i></span>
+          <span>网络安全事件追踪</span>
+        </a>
+        <div class="header-actions">
+          <button class="plain-button" id="show-social-sources" type="button" aria-haspopup="dialog" aria-controls="social-sources">追踪信源</button>
+          <a class="head-link" id="head-search" href="#event-search" aria-label="搜索事件"><span class="magnifier" aria-hidden="true"></span></a>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="hero" aria-labelledby="hero-title">
+        <canvas id="radar" aria-hidden="true"></canvas>
+        <h1 id="hero-title">全球安全事件<em>时间线</em></h1>
+        <p class="hero-description">追踪公开披露的网络攻击、泄露与重大中断。</p>
+      </section>
+
+      <section id="workspace" tabindex="-1" aria-label="事件观察">
+        <div class="section-top">
+          <div class="timeline-heading">
+            <h2>事件时间线</h2>
+            <div class="priority-actions">
+              <button type="button" class="plain-button" id="priority-toggle" aria-controls="incident-list" aria-pressed="false">只看重点</button>
+              <button type="button" class="priority-help" id="priority-help" aria-label="重点如何判断" aria-haspopup="dialog" aria-controls="priority-guide"><span aria-hidden="true">?</span></button>
+            </div>
+          </div>
+          <label class="search"><span class="magnifier" aria-hidden="true"></span><input id="event-search" type="search" placeholder="搜索事件、机构或国家" aria-label="搜索事件、机构或国家"><kbd aria-hidden="true">/</kbd></label>
+        </div>
+        <div id="type-filters" class="type-filters" role="group" aria-label="事件类型"></div>
+        <p id="result-count" class="result-count list-anchor" role="status" tabindex="-1"></p>
+        <ol id="incident-list" class="incident-list"></ol>
+        <nav id="timeline-pages" class="pagination" aria-label="事件时间线分页" hidden></nav>
+        <div id="empty" class="empty" hidden><h3>没有符合条件的事件</h3><p>试试其他关键词，或清除筛选。</p><button class="plain-button" type="button" id="clear">清除筛选</button></div>
+        <noscript><p>请启用 JavaScript 以查看事件列表。</p></noscript>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="priority-guide" aria-labelledby="priority-guide-title">
+    <div class="detail-inner">
+      <form method="dialog"><button class="close-button" aria-label="关闭重点说明" value="close" autofocus>×</button></form>
+      <h2 id="priority-guide-title">重点如何判断</h2>
+      <p>根据当事机构、监管部门或服务商公开披露的影响逐条判断，符合以下任一条件即可入选。</p>
+      <ul class="priority-rules">
+        <li><strong>关键服务受影响</strong><p>交通、政务、医疗、应急、能源设备供应或通用云服务等关键业务中断、明显受限、出现错误警报，或其核心运行系统遭入侵。</p></li>
+        <li><strong>影响范围大</strong><p>已确认或可能影响至少 10 万人、账户或记录，或同一事件已波及多个机构或运营站点。</p></li>
+        <li><strong>敏感数据受影响</strong><p>支付卡、身份证件或医疗等敏感资料遭未授权访问或泄露。</p></li>
+      </ul>
+    </div>
+  </dialog>
+
+  <dialog id="social-sources" aria-labelledby="social-sources-title">
+    <div class="detail-inner">
+      <form method="dialog"><button class="close-button" aria-label="关闭追踪信源" value="close" autofocus>×</button></form>
+      <h2 id="social-sources-title">追踪信源</h2>
+      <div id="social-source-list"></div>
+    </div>
+  </dialog>
+
+  <dialog id="incident-detail" aria-labelledby="detail-title">
+    <div class="detail-inner">
+      <form method="dialog"><button class="close-button" aria-label="关闭详情" value="close">×</button></form>
+      <p class="detail-meta" id="detail-meta"></p>
+      <h2 id="detail-title"></h2>
+      <p id="detail-summary"></p>
+      <dl id="detail-facts"></dl>
+      <h3>已公布的影响</h3><p id="detail-impact"></p>
+      <div id="detail-priority" hidden><h3>入选重点的原因</h3><p><strong id="detail-priority-criterion"></strong></p><p id="detail-priority-reason"></p></div>
+      <h3>事件出处</h3><ul id="detail-sources"></ul>
+    </div>
+  </dialog>
+</body>
+</html>
