@@ -1,4 +1,4 @@
-import { socialSourceGroups } from '../dist/social-sources.js';
+import { socialSourceGroups } from './social-sources.js';
 
 export const sourceDirectory = [
   {

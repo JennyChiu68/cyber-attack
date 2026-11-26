@@ -1,5 +1,4 @@
 import { categories, incidents, priorityCriteria, priorityFor } from './data.js';
-import { socialSourceGroups } from './social-sources.js';
 import './radar.js';
 
 const byId = (id) => document.getElementById(id);
@@ -85,7 +84,6 @@ const timelinePages = createPagination('timeline-pages', 'result-count', 6, rend
 const workspace = byId('workspace');
 const dialog = byId('incident-detail');
 const priorityGuide = byId('priority-guide');
-const socialSources = byId('social-sources');
 let categoryFilter = '';
 let priorityOnly = false;
 const filterButtons = new Map();
@@ -170,26 +168,13 @@ priorityToggle.addEventListener('click', () => {
   resetTimelinePage();
 });
 byId('priority-help').addEventListener('click', () => priorityGuide.showModal());
-for (const { title, entries } of socialSourceGroups) {
-  const section = element('section');
-  const list = element('ul', 'social-source-accounts');
-  for (const { name, links } of entries) {
-    const accounts = links.map(({ name }) => name).filter((label) => label.startsWith('@'));
-    const item = element('li');
-    item.append(element('strong', '', name), element('p', '', accounts.join(' / ')));
-    list.append(item);
-  }
-  section.append(element('h3', '', title.replace('社交媒体｜', '')), list);
-  byId('social-source-list').append(section);
-}
-byId('show-social-sources').addEventListener('click', () => socialSources.showModal());
 byId('clear').addEventListener('click', () => {
   search.value = '';
   priorityOnly = false;
   setCategory('');
   search.focus();
 });
-for (const modal of [dialog, priorityGuide, socialSources]) {
+for (const modal of [dialog, priorityGuide]) {
   modal.addEventListener('click', (event) => {
     if (event.target === modal) modal.close();
   });
@@ -217,7 +202,7 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => link.addEventListene
 window.addEventListener('hashchange', route);
 window.addEventListener('keydown', (event) => {
   if (event.key !== '/' || event.defaultPrevented || event.altKey || event.metaKey || event.ctrlKey
-      || dialog.open || priorityGuide.open || socialSources.open || event.target.closest('input, textarea, select, [contenteditable]')) return;
+      || dialog.open || priorityGuide.open || event.target.closest('input, textarea, select, [contenteditable]')) return;
   event.preventDefault();
   if (location.hash === '#event-search') route();
   else location.hash = 'event-search';

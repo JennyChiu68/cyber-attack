@@ -33,8 +33,6 @@ h1, h2, h3, p { margin: 0; }
 .skip:focus { position: fixed; z-index: 5; background: white; padding: .75rem; }
 .site-header { position: sticky; top: 0; z-index: 4; padding-top: env(safe-area-inset-top, 0px); background: #fbfaf8; border-bottom: 1px solid #eeeaeb; }
 .header-inner { display: grid; min-height: 54px; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 6px; }
-.header-actions { display: flex; gap: 6px; align-items: center; }
-#show-social-sources { padding-inline: 8px; }
 .brand { display: inline-flex; align-items: center; width: fit-content; min-height: 44px; gap: 8px; font-size: clamp(1rem, calc(var(--app-viewport) * .042), 1.2rem); font-weight: 800; line-height: 1.06; }
 .brand-mark { width: 32px; height: 32px; flex: 0 0 32px; border-radius: 9px; display: grid; place-items: center; background: #2a233b; }
 .brand-mark i { width: 19px; height: 19px; border: 1px solid #ffa18c; border-radius: 50%; position: relative; }
@@ -138,11 +136,8 @@ dialog { position: fixed; inset: auto 0 0; width: min(100%, var(--app-width)); m
 .close-button { width: 44px; height: 44px; right: 10px; top: 10px; }
 .detail-meta { min-height: 25px; margin-right: 45px; }
 dialog h2 { font-size: 1.38rem; }
-#priority-guide-title, #social-sources-title { margin-right: 44px; }
+#priority-guide-title { margin-right: 44px; }
 .priority-rules { display: grid; gap: 10px; margin-top: 12px; }
-dialog .social-source-accounts { list-style: none; padding: 0; }
-.social-source-accounts li { padding-block: 7px; border-bottom: 1px solid var(--line); }
-.social-source-accounts p { font-size: .84rem; overflow-wrap: anywhere; }
 dialog dl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 dialog dd { overflow-wrap: anywhere; }
 @media (max-width: 360px) {
